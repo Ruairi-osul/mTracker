@@ -1,0 +1,6 @@
+flask
+flask-wtf
+python-dotenv
+flask-sqlalchemy
+flask-mail
+wtforms-sqlalchemy
