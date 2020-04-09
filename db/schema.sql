@@ -42,8 +42,19 @@ CREATE TABLE groups (
         ON DELETE CASCADE
 );
 
+CREATE TABLE group_sessiontypes (
+    group_id INT NOT NULL,
+    sessiontype_id INT NOT NULL,
+    FOREIGN KEY (group_id)
+        REFERENCES groups(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (sessiontype_id)
+        REFERENCES session_types(id)
+        ON DELETE CASCADE,
+    PRIMARY KEY (group_id, sessiontype_id)
+);
+
 CREATE TABLE group_surgeries (
-    id INT PRIMARY KEY AUTO_INCREMENT,
     group_id INT NOT NULL,
     surgery_id INT NOT NULL,
     FOREIGN KEY (group_id)
@@ -51,8 +62,11 @@ CREATE TABLE group_surgeries (
         ON DELETE CASCADE,
     FOREIGN KEY (surgery_id)
         REFERENCES surgery_types(id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    PRIMARY KEY (group_id, surgery_id)
 );
+
+
 
 CREATE TABLE mice (
     id INT PRIMARY KEY AUTO_INCREMENT,
