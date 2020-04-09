@@ -10,7 +10,8 @@ CREATE TABLE experiments (
 
 CREATE TABLE session_types (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    session_name VARCHAR(100)
+    session_name VARCHAR(100) NOT NULL,
+    session_description TEXT NOT NULL
 );
 
 CREATE TABLE surgery_types (
