@@ -10,8 +10,10 @@ def create_app(config=Config):
 
     from mtracker.main.routes import main
     from mtracker.experiments.routes import experiments
+    from mtracker.session_types.routes import session_types
 
     app.register_blueprint(main)
     app.register_blueprint(experiments)
+    app.register_blueprint(session_types)
 
     return app

@@ -13,6 +13,15 @@
                     <a class="dropdown-item" href="{{ url_for('experiments.add_experiment',)}} ">Add</a>
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{{ url_for('session_types.view_session_types') }}"
+                    id="session_types-dropdown" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">Session Types</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{{ url_for('session_types.view_session_types') }}">View</a>
+                    <a class="dropdown-item" href="{{ url_for('session_types.add_session_type',)}} ">Add</a>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
