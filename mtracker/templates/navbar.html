@@ -31,6 +31,15 @@
                     <a class="dropdown-item" href="{{ url_for('surgery_types.add_surgery_type',)}} ">Add</a>
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{{ url_for('groups.view_groups') }}"
+                    id="session_types-dropdown" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">Groups</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownId">
+                    <a class="dropdown-item" href="{{ url_for('groups.view_groups') }}">View</a>
+                    <a class="dropdown-item" href="{{ url_for('groups.add_group',)}} ">Add</a>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>

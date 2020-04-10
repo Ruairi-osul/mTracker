@@ -12,10 +12,12 @@ def create_app(config=Config):
     from mtracker.experiments.routes import experiments
     from mtracker.session_types.routes import session_types
     from mtracker.surgery_types.routes import surgery_types
+    from mtracker.groups.routes import groups
 
     app.register_blueprint(main)
     app.register_blueprint(experiments)
     app.register_blueprint(session_types)
     app.register_blueprint(surgery_types)
+    app.register_blueprint(groups)
 
     return app

@@ -43,6 +43,8 @@ class Group(db.Model):
     group_name = db.Column(db.String(100))
     genotype = db.Column(db.String(50))
     group_description = db.Column(db.Text)
+    experiment_id = db.Column(db.Integer, db.ForeignKey("experiments.id"))
+    experiment = db.relationship("Experiment", backref=db.backref("groups"))
 
 
 class Mouse(db.Model):
