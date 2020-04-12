@@ -85,4 +85,12 @@ class Mouse(db.Model):
     is_male = db.Column(db.Boolean())
     group_id = db.Column(db.Integer(), db.ForeignKey("groups.id"))
     dob = db.Column(db.Date)
-    group = db.relationship("Group", backref=db.backref("mice", lazy="dynamic"))
+    group = db.relationship("Group", backref=db.backref("mice"))
+
+
+class HistologyImage(db.Model):
+    __tablename__ = "histology"
+    # TODO
+
+    mouse = db.relationship("Mouse", backref=db.backref("images"))
+    pass

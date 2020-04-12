@@ -83,5 +83,13 @@ class UpdateGroupForm(FlaskForm):
         get_label="surgery_name",
         get_pk=get_pk,
     )
+    data_types = QuerySelectMultipleField(
+        label="Data Types",
+        validators=[DataRequired()],
+        query_factory=data_type_factory,
+        allow_blank=False,
+        get_label="data_name",
+        get_pk=get_pk,
+    )
     genotype = StringField("Genotype", validators=[DataRequired(), Length(max=150)])
     submit = SubmitField("Update Group Type")

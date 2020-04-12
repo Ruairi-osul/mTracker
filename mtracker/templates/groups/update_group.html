@@ -45,10 +45,31 @@
         </div>
 
         <div class="form-group">
-            {{ form.session_types.label() }}
-            {{ form.session_types(class='form-control') }}
+            {{ form.sessions.label() }}
+            {{ form.sessions(class='form-control') }}
             <div class="invalid-feeback">
-                {% for error in form.session_types.errors %}
+                {% for error in form.sessions.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            {{ form.surgeries.label() }}
+            {{ form.surgeries(class='form-control') }}
+            <div class="invalid-feeback">
+                {% for error in form.surgeries.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.data_types.label() }}
+            {{ form.data_types(class='form-control') }}
+            <div class="invalid-feeback">
+                {% for error in form.data_types.errors %}
                 <span>{{ error }}</span>
                 {% endfor %}
             </div>
