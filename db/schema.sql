@@ -43,6 +43,12 @@ CREATE TABLE groups (
         ON DELETE CASCADE
 );
 
+CREATE TABLE data_types (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data_name VARCHAR(100) NOT NULL,
+    data_description TEXT
+);
+
 CREATE TABLE group_sessiontypes (
     group_id INT NOT NULL,
     sessiontype_id INT NOT NULL,
@@ -55,7 +61,19 @@ CREATE TABLE group_sessiontypes (
     PRIMARY KEY (group_id, sessiontype_id)
 );
 
-CREATE TABLE group_surgeries (
+CREATE TABLE group_datatypes(
+    group_id INT NOT NULL,
+    datatype_id INT NOT NULL,
+    FOREIGN KEY (group_id)
+        REFERENCES groups(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (datatype_id)
+        REFERENCES data_types(id)
+        ON DELETE CASCADE,
+    PRIMARY KEY(group_id, datatype_id)
+);
+
+CREATE TABLE group_surgerytypes (
     group_id INT NOT NULL,
     surgery_id INT NOT NULL,
     FOREIGN KEY (group_id)
@@ -66,8 +84,6 @@ CREATE TABLE group_surgeries (
         ON DELETE CASCADE,
     PRIMARY KEY (group_id, surgery_id)
 );
-
-
 
 CREATE TABLE mice (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -109,27 +125,6 @@ CREATE TABLE experiment_events (
     event_type_id INT NOT NULL,
     FOREIGN KEY (experimental_session_id)
         REFERENCES experimental_sessions(id)
-        ON DELETE CASCADE
-);
-
-CREATE TABLE experimental_videos (
-    id INT PRIMARY KEY NOT NULL,
-    experimental_session_id INT NOT NULL,
-    video_name VARCHAR(100),
-    video_path VARCHAR(150) NOT NULL,
-    FOREIGN KEY (experimental_session_id)
-        REFERENCES experimental_sessions(id)
-        ON DELETE CASCADE
-);
-
-
-CREATE TABLE mouse_trajectories (
-    id INT PRIMARY KEY NOT NULL,
-    video_id INT NOT NULL,
-    experimental_session_id INT NOT NULL,
-    trajectory_value DOUBLE,
-    FOREIGN KEY (video_id)
-        REFERENCES experimental_videos(id)
         ON DELETE CASCADE
 );
 

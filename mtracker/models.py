@@ -22,17 +22,31 @@ class SurgeryType(db.Model):
     surgery_description = db.Column(db.Text)
 
 
+group_surgerytypes = db.Table(
+    "group_surgerytypes",
+    db.Column("group_id", db.Integer, db.ForeignKey("groups.id"), primary_key=True),
+    db.Column(
+        "surgery_id", db.Integer, db.ForeignKey("surgery_types.id"), primary_key=True,
+    ),
+)
+
+
 group_sessiontypes = db.Table(
     "group_sessiontypes",
     db.Column("group_id", db.Integer, db.ForeignKey("groups.id"), primary_key=True),
-    db.Column("session_types", db.ForeignKey("session_types.id", primary_key=True)),
+    db.Column(
+        "sessiontype_id",
+        db.Integer,
+        db.ForeignKey("session_types.id"),
+        primary_key=True,
+    ),
 )
 
-group_surgerytypes = db.Table(
-    "group_surgerytypes",
-    db.Column("group_id", db.Integer, db.ForeignKey("groups.id", primary_key=True)),
+group_datatypes = db.Table(
+    "group_datatypes",
+    db.Column("group_id", db.Integer, db.ForeignKey("groups.id"), primary_key=True),
     db.Column(
-        "surgery_id", db.Integer, db.ForeignKey("surgery_types.id", primary_key=True)
+        "datatype_id", db.Integer, db.ForeignKey("data_types.id"), primary_key=True,
     ),
 )
 
@@ -44,7 +58,24 @@ class Group(db.Model):
     genotype = db.Column(db.String(50))
     group_description = db.Column(db.Text)
     experiment_id = db.Column(db.Integer, db.ForeignKey("experiments.id"))
+
     experiment = db.relationship("Experiment", backref=db.backref("groups"))
+    sessions = db.relationship(
+        "SessionType", secondary=group_sessiontypes, backref=db.backref("groups")
+    )
+    surgeries = db.relationship(
+        "SurgeryType", secondary=group_surgerytypes, backref=db.backref("groups")
+    )
+    data_types = db.relationship(
+        "DataType", secondary=group_datatypes, backref=db.backref("groups")
+    )
+
+
+class DataType(db.Model):
+    __tablename__ = "data_types"
+    id = db.Column(db.Integer(), primary_key=True)
+    data_name = db.Column(db.String(100))
+    data_description = db.Column(db.Text)
 
 
 class Mouse(db.Model):

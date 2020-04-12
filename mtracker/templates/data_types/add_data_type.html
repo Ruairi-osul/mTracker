@@ -1,39 +1,41 @@
 {% extends "base.html"%}
 
 {% block content %}
+
 <div class="card bg-dark p-5">
-    <h4 class="border-bottom border-secondary">Add an session</h4>
+    <h4 class="border-bottom border-secondary">Add a data type</h4>
     <form method="post">
         {{ form.hidden_tag() }}
         <div class="form-group">
-            {{ form.session_name.label }}
-            {% if form.session_name.errors %}
-            {{ form.session_name(class="form-control is-invalid") }}
+            {{ form.data_name.label }}
+            {% if form.data_name.errors %}
+            {{ form.data_name(class="form-control is-invalid") }}
             <div class="invalid-feeback">
-                {% for error in form.session_name.errors %}
+                {% for error in form.data_name.errors %}
                 <span>{{ error }}</span>
                 {% endfor %}
             </div>
             {% else%}
-            {{ form.session_name(class='form-control')}}
+            {{ form.data_name(class='form-control')}}
             {% endif %}
         </div>
 
         <div class="form-group">
-            {{ form.session_description.label }}
-            {% if form.session_description.errors %}
-            {{ form.session_description(class="form-control is-invalid") }}
+            {{ form.data_description.label }}
+            {% if form.data_description.errors %}
+            {{ form.data_description(class="form-control is-invalid") }}
             <div class="invalid-feeback">
-                {% for error in form.session_description.errors %}
+                {% for error in form.data_description.errors %}
                 <span>{{ error }}</span>
                 {% endfor %}
             </div>
             {% else%}
-            {{ form.session_description(class='form-control')}}
+            {{ form.data_description(class='form-control')}}
             {% endif %}
         </div>
 
         {{ form.submit(class="btn btn-primary btn-lg") }}
     </form>
 </div>
+
 {% endblock content %}

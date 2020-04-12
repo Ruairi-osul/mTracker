@@ -4,41 +4,20 @@
         aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{{ url_for('experiments.view_experiments') }}"
-                    id="experiments-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Experiments</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a class="dropdown-item" href="{{ url_for('experiments.view_experiments') }}">View</a>
-                    <a class="dropdown-item" href="{{ url_for('experiments.add_experiment',)}} ">Add</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('experiments.view_experiments') }}">Experiments</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{{ url_for('session_types.view_session_types') }}"
-                    id="session_types-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Session Types</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a class="dropdown-item" href="{{ url_for('session_types.view_session_types') }}">View</a>
-                    <a class="dropdown-item" href="{{ url_for('session_types.add_session_type',)}} ">Add</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('session_types.view_session_types') }}">Sessions</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{{ url_for('surgery_types.view_surgery_types') }}"
-                    id="session_types-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Surgery Types</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a class="dropdown-item" href="{{ url_for('surgery_types.view_surgery_types') }}">View</a>
-                    <a class="dropdown-item" href="{{ url_for('surgery_types.add_surgery_type',)}} ">Add</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('surgery_types.view_surgery_types') }}">Surgeries</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{{ url_for('groups.view_groups') }}"
-                    id="session_types-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Groups</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a class="dropdown-item" href="{{ url_for('groups.view_groups') }}">View</a>
-                    <a class="dropdown-item" href="{{ url_for('groups.add_group',)}} ">Add</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('data_types.view_data_types') }}">Data types</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('groups.view_groups') }}">Groups</a>
             </li>
         </ul>
     </div>

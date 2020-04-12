@@ -42,7 +42,7 @@ def update_experiment(id):
     form = UpdateExperimentForm()
     if request.method == "GET":
         form.exp_name.data = exp.exp_name
-        form.exp_description = exp.exp_description
+        form.exp_description.data = exp.exp_description
     if form.validate_on_submit():
         exp.exp_name = form.exp_name.data
         exp.exp_description = form.exp_description.data
@@ -57,5 +57,14 @@ def update_experiment(id):
             db.session.rollback()
             return redirect(url_for("update_experiment"), id=id)
         flash(f"Sucesfully updataed experiment '{exp.exp_name}'", category="success")
-        return redirect(url_for("view_experiments"))
+        return redirect(url_for("experiments.view_experiments"))
     return render_template("experiments/update_experiment.html", form=form)
+
+
+@experiments.route("/group/<int:id>/delete", methods=["GET", "POST"])
+def delete_experiment(id):
+    group = Experiment.query.get_or_404(int(id))
+    db.session.delete(group)
+    db.session.commit()
+    flash("Experiment deleted", category="success")
+    return redirect(url_for("groups.view_groups"))

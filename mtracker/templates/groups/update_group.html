@@ -21,10 +21,34 @@
         </div>
 
         <div class="form-group">
+            {{ form.genotype.label }}
+            {% if form.genotype.errors %}
+            {{ form.genotype(class="form-control is-invalid") }}
+            <div class="invalid-feeback">
+                {% for error in form.genotype.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else%}
+            {{ form.genotype(class='form-control')}}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
             {{ form.experiment.label() }}
             {{ form.experiment(class='form-control') }}
             <div class="invalid-feeback">
                 {% for error in form.experiment.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.session_types.label() }}
+            {{ form.session_types(class='form-control') }}
+            <div class="invalid-feeback">
+                {% for error in form.session_types.errors %}
                 <span>{{ error }}</span>
                 {% endfor %}
             </div>

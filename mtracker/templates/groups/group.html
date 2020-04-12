@@ -10,35 +10,69 @@
         </div>
         <p class="card-text mt-3">{{ group.group_description }}</p>
         <p class="card-text mt-3">Experiment: <a
-                href="{{ url_for('experiments.single_experiment', id=group.experiment.id) }}">{{ group.experiment.experiment_name }}</a>
+                href="{{ url_for('experiments.single_experiment', id=group.experiment.id) }}">{{ group.experiment.exp_name }}</a>
         </p>
-    </div>
-    <div class="d-flex">
-        <a class="btn btn-primary mx-2" href="{{url_for('groups.update_group', id=group.id)}}">Update</a>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-danger mx-2" data-toggle="modal" data-target="#exampleModal">
-            Delete
-        </button>
+        <!-- TODO show table of group sessions with cols: group name, session name, data types -->
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this
-                            group?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Changes cannot be undone.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a type="button" class="btn btn-danger"
-                            href={{ url_for('groups.delete_group', id=group.id)}}>Delete</a>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover mx-auto">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Group</th>
+                        <th scope="col">Session Name</th>
+                        <th scope="col">Data types</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gsession_type in group.session_types %}
+                    <tr>
+                        <td scope="row">{{ gsession_type.id }}</td>
+                        <!-- <td>{{ gsession_type.group.group_name }}</td> -->
+                        <td>{{gsession_type}}</td>
+                        <td>{{ gsession_type.session_type.session_name }}</td>
+                        <td>
+                            <ul>
+                                {% for dtype in gsession_type.data_types %}
+                                <li>{{dype}}</li>
+                                {% endfor %}
+                                <li><a href="{{ url_for('groups.add_data_types', id=gsession_type.id) }}">Add</a></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex mt-5 mb-1">
+            <a class="btn btn-primary mr-2" href="{{url_for('groups.update_group', id=group.id)}}">Update</a>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger mx-2" data-toggle="modal" data-target="#exampleModal">
+                Delete
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this
+                                group?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Changes cannot be undone.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <a type="button" class="btn btn-danger"
+                                href={{ url_for('groups.delete_group', id=group.id)}}>Delete</a>
+                        </div>
                     </div>
                 </div>
             </div>

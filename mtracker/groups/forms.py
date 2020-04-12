@@ -1,13 +1,15 @@
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError
-from wtforms_sqlalchemy.fields import QuerySelectField
-from mtracker.models import Group, Experiment
+from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from mtracker.models import Group
+from mtracker.query_factories import (
+    experiment_query_factory,
+    session_type_factory,
+    surgery_type_factory,
+    data_type_factory,
+)
 from mtracker.utils import get_pk
-
-
-def experiment_query_factory():
-    return Experiment.query
 
 
 class AddGroupForm(FlaskForm):
@@ -24,6 +26,28 @@ class AddGroupForm(FlaskForm):
         get_pk=get_pk,
     )
     genotype = StringField("Genotype", validators=[DataRequired(), Length(max=150)])
+    sessions = QuerySelectMultipleField(
+        label="Session Types",
+        validators=[DataRequired()],
+        query_factory=session_type_factory,
+        get_pk=get_pk,
+        get_label="session_name",
+    )
+    surgeries = QuerySelectMultipleField(
+        label="Surgeries",
+        query_factory=surgery_type_factory,
+        allow_blank=True,
+        get_label="surgery_name",
+        get_pk=get_pk,
+    )
+    data_types = QuerySelectMultipleField(
+        label="Data Types",
+        validators=[DataRequired()],
+        query_factory=data_type_factory,
+        allow_blank=False,
+        get_label="data_name",
+        get_pk=get_pk,
+    )
     submit = SubmitField("Add Group Type")
 
     def validate_exp_name(self, exp_name):
@@ -42,7 +66,21 @@ class UpdateGroupForm(FlaskForm):
         validators=[DataRequired()],
         query_factory=experiment_query_factory,
         allow_blank=False,
-        get_label="experiment_name",
+        get_label="exp_name",
+        get_pk=get_pk,
+    )
+    sessions = QuerySelectMultipleField(
+        label="Session Types",
+        validators=[DataRequired()],
+        query_factory=session_type_factory,
+        get_pk=get_pk,
+        get_label="session_name",
+    )
+    surgeries = QuerySelectMultipleField(
+        label="Surgeries",
+        query_factory=surgery_type_factory,
+        allow_blank=True,
+        get_label="surgery_name",
         get_pk=get_pk,
     )
     genotype = StringField("Genotype", validators=[DataRequired(), Length(max=150)])

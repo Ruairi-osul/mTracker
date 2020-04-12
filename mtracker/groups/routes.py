@@ -24,6 +24,9 @@ def add_group():
             group_description=form.group_description.data,
             experiment=form.experiment.data,
             genotype=form.genotype.data,
+            sessions=form.sessions.data,
+            surgeries=form.surgeries.data,
+            data_types=form.data_types.data,
         )
         db.session.add(new_group)
         db.session.commit()
@@ -46,10 +49,16 @@ def update_group(id):
         form.group_name.data = group.group_name
         form.group_description.data = group.group_description
         form.genotype.data = group.genotype
+        form.sessions.data = group.sessions
+        form.surgeries.data = group.surgeries
+        form.data_types.data = group.data_types
     if form.validate_on_submit():
         group.group_name = form.group_name.data
         group.group_description = form.group_description.data
         group.genotype = form.genotype.data
+        group.sessions = form.sessions.data
+        group.surgeries = form.surgeries.data
+        group.data_types = form.data_types.data
         try:
             db.session.add(group)
             db.session.commit()

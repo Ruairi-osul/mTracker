@@ -45,6 +45,36 @@
         </div>
 
         <div class="form-group">
+            {{ form.sessions.label() }}
+            {{ form.sessions(class='form-control') }}
+            <div class="invalid-feeback">
+                {% for error in form.sessions.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.surgeries.label() }}
+            {{ form.surgeries(class='form-control') }}
+            <div class="invalid-feeback">
+                {% for error in form.surgeries.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.data_types.label() }}
+            {{ form.data_types(class='form-control') }}
+            <div class="invalid-feeback">
+                {% for error in form.data_types.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group">
             {{ form.group_description.label }}
             {% if form.group_description.errors %}
             {{ form.group_description(class="form-control is-invalid") }}
