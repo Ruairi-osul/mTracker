@@ -1,3 +1,8 @@
 .list-header{
     border: none;
 }
+
+td .image-preview{
+    height: 60px; 
+    width: 60px;
+}

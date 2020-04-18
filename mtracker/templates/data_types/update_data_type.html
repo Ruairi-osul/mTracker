@@ -21,6 +21,20 @@
         </div>
 
         <div class="form-group">
+            {{ form.category.label }}
+            {% if form.category.errors %}
+            {{ form.category(class="form-control is-invalid") }}
+            <div class="invalid-feeback">
+                {% for error in form.category.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else%}
+            {{ form.category(class='form-control')}}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
             {{ form.data_description.label }}
             {% if form.data_description.errors %}
             {{ form.data_description(class="form-control is-invalid") }}

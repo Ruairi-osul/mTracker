@@ -1,7 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms.fields import StringField, TextAreaField, SubmitField
-from wtforms.validators import DataRequired, Length, ValidationError
-from mtracker.models import DataType
+from wtforms.fields import StringField, TextAreaField, SubmitField, SelectField
+from wtforms.validators import DataRequired, Length
+
+CATEGORY_CHOICES = [
+    ("neurons", "Neurons"),
+    ("neuronal_activity", "Neuronal Activity"),
+    ("events", "Events"),
+    ("continuous", "Continuous"),
+]
 
 
 class AddDataTypeForm(FlaskForm):
@@ -11,12 +17,8 @@ class AddDataTypeForm(FlaskForm):
     data_description = TextAreaField(
         label="Data Type Description", validators=[DataRequired()]
     )
-    submit = SubmitField("Add Data Type Type")
-
-    def validate_exp_name(self, exp_name):
-        name_exists = DataType.query.filter_by(exp_name=exp_name.data).first()
-        if name_exists:
-            raise ValidationError("An experiment with that name already exists.")
+    category = SelectField("Category", choices=CATEGORY_CHOICES)
+    submit = SubmitField("Add Data Type")
 
 
 class UpdateDataTypeForm(FlaskForm):
@@ -26,4 +28,5 @@ class UpdateDataTypeForm(FlaskForm):
     data_description = TextAreaField(
         label="Data Type Description", validators=[DataRequired()]
     )
-    submit = SubmitField("Update Data Type Type")
+    category = SelectField("Category", choices=CATEGORY_CHOICES)
+    submit = SubmitField("Update Data Type")

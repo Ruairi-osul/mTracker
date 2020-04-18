@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+
+{% block content %}
+<div class="card bg-dark p-5">
+    <div>
+        <h3 class="border-bottom border-light">View Records</h3>
+    </div>
+    <div class="mt-3">
+        <p>Click below to view entries of a corresponding data type</p>
+        <div class="list-group">
+            <a href="{{url_for('experiments.view_experiments')}}"
+                class="list-group-item list-group-item-action">Experiments</a>
+            <a href="{{url_for('data_types.view_data_types')}}" class="list-group-item list-group-item-action">Data
+                Types</a>
+            <a href="{{url_for('session_types.view_session_types')}}"
+                class="list-group-item list-group-item-action">Session Types</a>
+            <a href="{{url_for('surgery_types.view_surgery_types')}}"
+                class="list-group-item list-group-item-action">Surgery Types</a>
+            <a href="{{url_for('groups.view_groups')}}" class="list-group-item list-group-item-action">Groups</a>
+            <a href="{{url_for('mice.view_mice')}}" class="list-group-item list-group-item-action">Mice</a>
+            <a href="{{url_for('datasets.view_datasets')}}" class="list-group-item list-group-item-action">Datasets</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

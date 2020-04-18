@@ -59,15 +59,23 @@ class Group(db.Model):
     group_description = db.Column(db.Text)
     experiment_id = db.Column(db.Integer, db.ForeignKey("experiments.id"))
 
-    experiment = db.relationship("Experiment", backref=db.backref("groups"))
+    experiment = db.relationship(
+        "Experiment", backref=db.backref("groups", cascade="all,delete")
+    )
     sessions = db.relationship(
-        "SessionType", secondary=group_sessiontypes, backref=db.backref("groups")
+        "SessionType",
+        secondary=group_sessiontypes,
+        backref=db.backref("groups", cascade="all,delete"),
     )
     surgeries = db.relationship(
-        "SurgeryType", secondary=group_surgerytypes, backref=db.backref("groups")
+        "SurgeryType",
+        secondary=group_surgerytypes,
+        backref=db.backref("groups", cascade="all,delete"),
     )
     data_types = db.relationship(
-        "DataType", secondary=group_datatypes, backref=db.backref("groups")
+        "DataType",
+        secondary=group_datatypes,
+        backref=db.backref("groups", cascade="all,delete"),
     )
 
 
@@ -75,6 +83,7 @@ class DataType(db.Model):
     __tablename__ = "data_types"
     id = db.Column(db.Integer(), primary_key=True)
     data_name = db.Column(db.String(100))
+    category = db.Column(db.String(150))
     data_description = db.Column(db.Text)
 
 
@@ -83,14 +92,48 @@ class Mouse(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     mouse_name = db.Column(db.String(100))
     is_male = db.Column(db.Boolean())
+    dob = db.Column(db.Date())
+    cull_date = db.Column(db.Date())
+    is_done = db.Column(db.Boolean())
     group_id = db.Column(db.Integer(), db.ForeignKey("groups.id"))
-    dob = db.Column(db.Date)
-    group = db.relationship("Group", backref=db.backref("mice"))
+
+    group = db.relationship("Group", backref=db.backref("mice", cascade="all,delete"))
 
 
-class HistologyImage(db.Model):
-    __tablename__ = "histology"
-    # TODO
+class Image(db.Model):
+    __tablename__ = "images"
 
-    mouse = db.relationship("Mouse", backref=db.backref("images"))
-    pass
+    id = db.Column(db.Integer(), primary_key=True)
+    image_name = db.Column(db.String(100))
+    image_path = db.Column(db.String(150))
+    mouse_id = db.Column(db.Integer(), db.ForeignKey("mice.id"))
+
+    mouse = db.relationship("Mouse", backref=db.backref("images", cascade="all,delete"))
+
+
+class DataSet(db.Model):
+    __tablename__ = "datasets"
+
+    id = db.Column(db.Integer, primary_key=True)
+    mouse_id = db.Column(db.Integer, db.ForeignKey("mice.id"))
+    session_type_id = db.Column(db.Integer, db.ForeignKey("session_types.id"))
+    data_type_id = db.Column(db.Integer, db.ForeignKey("data_types.id"))
+
+    mouse = db.relationship(
+        "Mouse", backref=db.backref("datasets", lazy="dynamic", cascade="all,delete")
+    )
+    session = db.relationship(
+        "SessionType",
+        backref=db.backref("datasets", lazy="dynamic", cascade="all,delete"),
+    )
+    data_type = db.relationship(
+        "DataType", backref=db.backref("datasets", lazy="dynamic", cascade="all,delete")
+    )
+
+
+class Event(db.Model):
+    __tablename__ = "events"
+
+    dataset_id = db.Column(db.Integer, db.ForeignKey("datasets.id"), primary_key=True)
+    timepoint_sec = db.Column(db.Float, primary_key=True)
+    dataset = db.relationship("DataSet", backref=db.backref("events", lazy="dynamic"))

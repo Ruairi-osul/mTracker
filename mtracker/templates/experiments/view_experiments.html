@@ -12,6 +12,7 @@
                     <th scope="col">id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Num Groups</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +26,9 @@
                     </td>
                     <td><a class="text-white"
                             href="{{ url_for('experiments.single_experiment', id=experiment.id) }}">{{ experiment.exp_description }}</a>
+                    </td>
+                    <td><a class="text-white"
+                            href="{{ url_for('experiments.single_experiment', id=experiment.id) }}">{{ experiment.groups | length }}</a>
                     </td>
                 </tr>
                 {% endfor %}

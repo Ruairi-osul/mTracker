@@ -11,9 +11,11 @@
                 <tr>
                     <th scope="col">id</th>
                     <th scope="col">Name</th>
-                    <th scope="col">genotype</th>
+                    <th scope="col">Genotype</th>
                     <th scope="col">Experiment</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Num Mice</th>
+                    <th scope="col">Num Finished Mice</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +35,12 @@
                     </td>
                     <td><a class="text-white"
                             href="{{ url_for('groups.single_group', id=group.id) }}">{{ group.group_description }}</a>
+                    </td>
+                    <td><a class="text-white"
+                            href="{{ url_for('groups.single_group', id=group.id) }}">{{ group.mice | length }}</a>
+                    </td>
+                    <td><a class="text-white"
+                            href="{{ url_for('groups.single_group', id=group.id) }}">{{ group.mice | sum(attribute="is_done") }}</a>
                     </td>
                 </tr>
                 {% endfor %}

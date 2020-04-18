@@ -38,7 +38,10 @@ def add_group():
 @groups.route("/group/<int:id>", methods=["GET", "POST"])
 def single_group(id):
     group = Group.query.get_or_404(int(id))
-    return render_template("groups/group.html", group=group)
+    other_groups = Group.query.filter(
+        Group.experiment == group.experiment, Group.id != group.id
+    )
+    return render_template("groups/group.html", group=group, other_groups=other_groups)
 
 
 @groups.route("/group/<int:id>/update", methods=["GET", "POST"])

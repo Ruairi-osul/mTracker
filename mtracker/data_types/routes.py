@@ -22,7 +22,9 @@ def add_data_type():
     form = AddDataTypeForm()
     if form.validate_on_submit():
         new_data_type = DataType(
-            data_name=form.data_name.data, data_description=form.data_description.data,
+            data_name=form.data_name.data,
+            data_description=form.data_description.data,
+            category=form.category.data,
         )
         db.session.add(new_data_type)
         db.session.commit()
@@ -44,6 +46,7 @@ def update_data_type(id):
     if request.method == "GET":
         form.data_name.data = data_type.data_name
         form.data_description.data = data_type.data_description
+        form.category.data = data_type.category.data
     if form.validate_on_submit():
         data_type.data_name = form.data_name.data
         data_type.data_description = form.data_description.data
