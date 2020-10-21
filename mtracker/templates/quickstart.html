@@ -1,0 +1,37 @@
+{% extends "base.html"%}
+
+{% block content %}
+
+<div class="card bg-dark p-5">
+    <h3 class="border-bottom border-light mb-4">Quickstart</h3>
+    <div class="mb-4">
+        <div>
+            <h5 class="border-bottom border-dark">What is mTracker?</h5>
+        </div>
+        <div>
+            <p>
+                mTracker is a tool which facilitates data entry for neuroscience experiments. The goal is to facilitate
+                centralisation of datasources. Data is stored in a relational database. This database can be queried in
+                subsequent analysis.
+            </p>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <div>
+            <h5 class="border-bottom border-dark">The mTracker Data Model</h5>
+        </div>
+        <div>
+            <p>
+                mTracker uses a hierarchical datamodel. Each dataset belongs to a mouse. Each mouse belongs to a group.
+                Each group belongs to an experiment.
+                Genotype, surgery and session information are specified at the group level.
+                Datasets contain information from one mouse on one session.
+                The full data model can be viewed <a href="{{url_for('main.datamodel')}}">here</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

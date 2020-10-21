@@ -3,8 +3,8 @@
 {% block content %}
 
 <div class="card bg-dark pt-5 px-5 pb-2">
-    {% if experiments %}
-    <h4 class="border-bottom">Experiments</h4>
+    {% if surgery_types %}
+    <h4 class="border-bottom">Surgery Types</h4>
     <div class="table-responsive py-3">
         <table class="table table-striped table-hover mx-auto">
             <thead>
@@ -15,49 +15,49 @@
                 </tr>
             </thead>
             <tbody>
-                {% for experiment in experiments.items %}
+                {% for surgery_type in surgery_types.items %}
                 <tr>
                     <td scope="row"><a class="text-white"
-                            href="{{ url_for('experiments.single_experiment', id=experiment.id) }}">{{ experiment.id }}</a>
+                            href="{{ url_for('surgery_types.single_surgery_type', id=surgery_type.id) }}">{{ surgery_type.id }}</a>
                     </td>
                     <td><a class="text-white"
-                            href="{{ url_for('experiments.single_experiment', id=experiment.id) }}">{{ experiment.exp_name }}</a>
+                            href="{{ url_for('surgery_types.single_surgery_type', id=surgery_type.id) }}">{{ surgery_type.surgery_name }}</a>
                     </td>
                     <td><a class="text-white"
-                            href="{{ url_for('experiments.single_experiment', id=experiment.id) }}">{{ experiment.exp_description }}</a>
+                            href="{{ url_for('surgery_types.single_surgery_type', id=surgery_type.id) }}">{{ surgery_type.surgery_description }}</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         <div class="d-flex">
-            <a href="{{ url_for('experiments.add_experiment')}}" class="btn btn-primary mt-2">Add Experiment</a>
+            <a href="{{ url_for('surgery_types.add_surgery_type')}}" class="btn btn-primary mt-2">Add Surgery</a>
         </div>
     </div>
     {% else %}
     <div class="jumbotron">
         <h1 class="display-3">Looks like there is nothing here.</h1>
-        <p class="lead">Experiments will show up here when they are added to the database.</p>
+        <p class="lead">Surgerys will show up here when they are added to the database.</p>
         <hr class="my-2">
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('experiments.add_experiment') }}" role="button">Add an
-                experiment.</a>
+            <a class="btn btn-primary btn-lg" href="{{ url_for('surgery_types.add_surgery_type') }}" role="button">Add a
+                surgery_type.</a>
         </p>
     </div>
     {% endif %}
 </div>
-{% if experiments %}
+{% if surgery_types %}
 <div class="d-flex justify-content-center mt-2">
-    {% for page in experiments.iter_pages(left_edge=1, left_current=2, right_current=2, right_edge=1) %}
+    {% for page in surgery_types.iter_pages(left_edge=1, left_current=2, right_current=2, right_edge=1) %}
     {% if not page %}
     <a name="" id="" class="btn disabled btn-outline-secondary text-secondary m-1" href="" role="button">...</a>
     {% else %}
-    {% if page == experiments.page %}
-    <a name="" id="" class="btn btn-primary m-1" href="{{url_for('experiments.view_experiments', page=page)}}"
+    {% if page == surgery_types.page %}
+    <a name="" id="" class="btn btn-primary m-1" href="{{url_for('surgery_types.view_surgery_types', page=page)}}"
         role="button">{{page}}</a>
     {% else %}
-    <a name="" id="" class="btn btn-outline-primary m-1" href="{{url_for('experiments.view_experiments',page=page)}}"
-        role="button">{{page}}</a>
+    <a name="" id="" class="btn btn-outline-primary m-1"
+        href="{{url_for('surgery_types.view_surgery_types',page=page)}}" role="button">{{page}}</a>
     {% endif %}
     {% endif %}
     {% endfor %}

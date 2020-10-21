@@ -1,0 +1,96 @@
+{% extends "base.html"%}
+
+{% block content %}
+
+<div class="card bg-dark p-5">
+    <h4 class="border-bottom border-secondary">Update group</h4>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.group_name.label }}
+            {% if form.group_name.errors %}
+            {{ form.group_name(class="form-control is-invalid") }}
+            <div class="invalid-feeback">
+                {% for error in form.group_name.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else%}
+            {{ form.group_name(class='form-control')}}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.genotype.label }}
+            {% if form.genotype.errors %}
+            {{ form.genotype(class="form-control is-invalid") }}
+            <div class="invalid-feeback">
+                {% for error in form.genotype.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else%}
+            {{ form.genotype(class='form-control')}}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.experiment.label() }}
+            {{ form.experiment(class='form-control') }}
+            <div class="invalid-feeback">
+                {% for error in form.experiment.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.sessions.label() }}
+            {{ form.sessions(class='form-control') }}
+            <div class="invalid-feeback">
+                {% for error in form.sessions.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            {{ form.surgeries.label() }}
+            {{ form.surgeries(class='form-control') }}
+            <div class="invalid-feeback">
+                {% for error in form.surgeries.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.data_types.label() }}
+            {{ form.data_types(class='form-control') }}
+            <div class="invalid-feeback">
+                {% for error in form.data_types.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.group_description.label }}
+            {% if form.group_description.errors %}
+            {{ form.group_description(class="form-control is-invalid") }}
+            <div class="invalid-feeback">
+                {% for error in form.group_description.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else%}
+            {{ form.group_description(class='form-control')}}
+            {% endif %}
+        </div>
+
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+    </form>
+</div>
+
+{% endblock content %}

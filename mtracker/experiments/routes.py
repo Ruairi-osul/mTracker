@@ -11,7 +11,9 @@ experiments = Blueprint("experiments", __name__)
 def view_experiments():
     page = request.args.get("page", 1, type=int)
     experiments = Experiment.query.paginate(per_page=20, page=page)
-    return render_template("view_experiments.html", page=page, experiments=experiments)
+    return render_template(
+        "experiments/view_experiments.html", page=page, experiments=experiments
+    )
 
 
 @experiments.route("/experiment/add", methods=["GET", "POST"])
@@ -25,13 +27,13 @@ def add_experiment():
         db.session.commit()
         flash(f"Experiment '{new_experiment.exp_name}' added.", category="success")
         return redirect(url_for("experiments.view_experiments"))
-    return render_template("add_experiment.html", form=form)
+    return render_template("experiments/add_experiment.html", form=form)
 
 
 @experiments.route("/experiment/<int:id>", methods=["GET", "POST"])
 def single_experiment(id):
     exp = Experiment.query.get_or_404(int(id))
-    return render_template("experiment.html", experiment=exp)
+    return render_template("experiments/experiment.html", experiment=exp)
 
 
 @experiments.route("/experiment/<int:id>/update", methods=["GET", "POST"])
@@ -40,7 +42,7 @@ def update_experiment(id):
     form = UpdateExperimentForm()
     if request.method == "GET":
         form.exp_name.data = exp.exp_name
-        form.exp_description = exp.exp_description
+        form.exp_description.data = exp.exp_description
     if form.validate_on_submit():
         exp.exp_name = form.exp_name.data
         exp.exp_description = form.exp_description.data
@@ -55,5 +57,14 @@ def update_experiment(id):
             db.session.rollback()
             return redirect(url_for("update_experiment"), id=id)
         flash(f"Sucesfully updataed experiment '{exp.exp_name}'", category="success")
-        return redirect(url_for("view_experiments"))
-    return render_template("update_experiment.html", form=form)
+        return redirect(url_for("experiments.view_experiments"))
+    return render_template("experiments/update_experiment.html", form=form)
+
+
+@experiments.route("/group/<int:id>/delete", methods=["GET", "POST"])
+def delete_experiment(id):
+    group = Experiment.query.get_or_404(int(id))
+    db.session.delete(group)
+    db.session.commit()
+    flash("Experiment deleted", category="success")
+    return redirect(url_for("groups.view_groups"))

@@ -1,17 +1,38 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{url_for('main.index')}}">mTracker</a>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{url_for('main.index')}}"><i class="fas fa-database mr-2"></i>mTracker</a>
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
         aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{{ url_for('experiments.view_experiments') }}"
-                    id="experiments-dropdown" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Experiments</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a class="dropdown-item" href="{{ url_for('experiments.view_experiments') }}">View</a>
-                    <a class="dropdown-item" href="{{ url_for('experiments.add_experiment',)}} ">Add</a>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('experiments.view_experiments') }}">Experiments</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('session_types.view_session_types') }}">Sessions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('surgery_types.view_surgery_types') }}">Surgeries</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('data_types.view_data_types') }}">Data types</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('groups.view_groups') }}">Groups</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('mice.view_mice') }}">Mice</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('datasets.view_datasets') }}">Datasets</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('images.view_images') }}">Images</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('main.quickstart') }}">
+                    Quickstart</a>
             </li>
         </ul>
     </div>

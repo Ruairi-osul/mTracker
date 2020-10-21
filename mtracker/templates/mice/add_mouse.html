@@ -1,0 +1,75 @@
+{% extends "base.html"%}
+
+{% block content %}
+
+<div class="card bg-dark p-5">
+    <h4 class="border-bottom border-secondary">Add Mouse</h4>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.mouse_name.label }}
+            {% if form.mouse_name.errors %}
+            {{ form.mouse_name(class="form-control is-invalid") }}
+            <div class="invalid-feeback">
+                {% for error in form.mouse_name.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else%}
+            {{ form.mouse_name(class='form-control')}}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.group.label() }}
+            {{ form.group(class='form-control') }}
+            <div class="invalid-feeback">
+                {% for error in form.group.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.dob.label }}
+            {% if form.dob .errors %}
+            {{ form.dob(class="form-control is-invalid") }}
+            <div class="invalid-feeback">
+                {% for error in form.dob   .errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else%}
+            {{ form.dob(class='form-control')}}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.cull_date.label }}
+            {% if form.cull_date .errors %}
+            {{ form.cull_date(class="form-control is-invalid") }}
+            <div class="invalid-feeback">
+                {% for error in form.cull_date   .errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else%}
+            {{ form.cull_date(class='form-control')}}
+            {% endif %}
+        </div>
+
+        <div class="form-check mb-3">
+            {{ form.is_male(class='form-check-input')}}
+            {{form.is_male.label(class="form-check-label")}}
+        </div>
+
+        <div class="form-check mb-3">
+            {{ form.is_done(class='form-check-input')}}
+            {{form.is_done.label(class="form-check-label")}}
+        </div>
+
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+    </form>
+</div>
+
+{% endblock content %}
