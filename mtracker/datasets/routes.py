@@ -55,6 +55,8 @@ def single_dataset(id):
     data_query = data_query_factory(
         dset_id=dset.id, data_category=dset.data_type.category
     )
+    print(dset.data_type)
+    print("UP")
     page = request.args.get("page", 1, int)
     data = data_query.paginate(per_page=20, page=page)
     template = dset_template_factory(data_category=dset.data_type.category)

@@ -1,4 +1,4 @@
-from mtracker.models import Event
+from mtracker.models import Event, ContinuousData
 
 
 def data_query_factory(dset_id: int, data_category: str):
@@ -7,6 +7,8 @@ def data_query_factory(dset_id: int, data_category: str):
     """
     if data_category == "events":
         return Event.query.filter_by(dataset_id=dset_id)
+    elif data_category == "continuous":
+        return ContinuousData.query.filter_by(dataset_id=dset_id)
     else:
         raise ValueError(f"Category {data_category} not found.")
 
@@ -17,3 +19,5 @@ def dset_template_factory(data_category: str) -> str:
     """
     if data_category == "events":
         return "datasets/event_dataset.html"
+    elif data_category == "continuous":
+        return "datasets/continuous_dataset.html"

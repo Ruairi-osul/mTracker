@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from sqlalchemy.exc import IntegrityError
 import pandas as pd
-from mtracker.models import Event
+from mtracker.models import Event, ContinuousData
 
 
 class InsertionError(Exception):
@@ -24,9 +24,6 @@ class Inserter(ABC):
 class EventInserter(Inserter):
     def _insert(self, data: pd.DataFrame, session) -> None:
         session.bulk_insert_mappings(Event, data.to_dict(orient="records"))
-        # data.to_sql(
-        # name="events", con=session, index=False, if_exists="append",
-        # )
 
 
 class NeuronsInserter(Inserter):
@@ -41,7 +38,7 @@ class NeuronalActivityInserter(Inserter):
 
 class ContinuousActivityInserter(Inserter):
     def _insert(self, data, session):
-        pass
+        session.bulk_insert_mappings(ContinuousData, data.to_dict(orient="records"))
 
 
 def inserter_factory(category: str):
