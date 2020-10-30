@@ -136,4 +136,4 @@ class Event(db.Model):
 
     dataset_id = db.Column(db.Integer, db.ForeignKey("datasets.id"), primary_key=True)
     timepoint_sec = db.Column(db.Float, primary_key=True)
-    dataset = db.relationship("DataSet", backref=db.backref("events", lazy="dynamic"))
+    dataset = db.relationship("DataSet", backref=db.backref("events", lazy="dynamic", cascade="all,delete"))
