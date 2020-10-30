@@ -67,4 +67,4 @@ def delete_experiment(id):
     db.session.delete(group)
     db.session.commit()
     flash("Experiment deleted", category="success")
-    return redirect(url_for("groups.view_groups"))
+    return redirect(url_for("experiments.view_experiments"))
