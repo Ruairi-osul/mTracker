@@ -55,7 +55,10 @@ class NeuronalActivityProcessor(Processor):
 
 class ContinuousActivityProcessor(Processor):
     def _process_data(self, form_data: str, dset_id: int) -> pd.DataFrame:
-        pass
+        df = pd.read_csv(form_data)
+        assert list(df.columns) == ["timepoint_sec", "data_value"]
+        df["dataset_id"] = dset_id
+        return df
 
 
 def processor_factory(category: str):

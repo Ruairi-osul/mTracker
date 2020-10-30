@@ -136,4 +136,18 @@ class Event(db.Model):
 
     dataset_id = db.Column(db.Integer, db.ForeignKey("datasets.id"), primary_key=True)
     timepoint_sec = db.Column(db.Float, primary_key=True)
-    dataset = db.relationship("DataSet", backref=db.backref("events", lazy="dynamic", cascade="all,delete"))
+    dataset = db.relationship(
+        "DataSet", backref=db.backref("events", lazy="dynamic", cascade="all,delete")
+    )
+
+
+class ContinuousData(db.Model):
+    __tablename__ = "continuous_data"
+
+    dataset_id = db.Column(db.Integer, db.ForeignKey("datasets.id"), primary_key=True)
+    timepoint_sec = db.Column(db.Float, primary_key=True)
+    data_value = db.Column(db.Float)
+    dataset = db.relationship(
+        "DataSet",
+        backref=db.backref("continuous_data", lazy="dynamic", cascade="all,delete"),
+    )

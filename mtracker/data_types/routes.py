@@ -46,7 +46,7 @@ def update_data_type(id):
     if request.method == "GET":
         form.data_name.data = data_type.data_name
         form.data_description.data = data_type.data_description
-        form.category.data = data_type.category.data
+        form.category.data = data_type.category
     if form.validate_on_submit():
         data_type.data_name = form.data_name.data
         data_type.data_description = form.data_description.data

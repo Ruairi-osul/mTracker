@@ -152,7 +152,7 @@ CREATE TABLE events (
 
 CREATE TABLE continuous_data (
     dataset_id INT NOT NULL,
-    timepoint_sec INT NOT NULL,
+    timepoint_sec DOUBLE NOT NULL,
     data_value DOUBLE,
     FOREIGN KEY (dataset_id)
         REFERENCES datasets(id)
