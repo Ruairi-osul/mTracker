@@ -32,6 +32,7 @@ class AddDataSetForm(FlaskForm):
         query_factory=session_type_factory,
         get_pk=get_pk,
         get_label="session_name",
+        allow_blank=True
     )
     datafile = FileField(label="Datafile", validators=[DataRequired()])
     submit = SubmitField("Upload")
