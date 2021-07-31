@@ -21,7 +21,7 @@ CREATE TABLE surgery_types (
 );
 
 
-CREATE TABLE groups (
+CREATE TABLE experimental_groups (
     id INT PRIMARY KEY AUTO_INCREMENT,
     experiment_id INT NOT NULL,
     group_name VARCHAR(100) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE group_sessiontypes (
     group_id INT NOT NULL,
     sessiontype_id INT NOT NULL,
     FOREIGN KEY (group_id)
-        REFERENCES groups(id)
+        REFERENCES experimental_groups(id)
         ON DELETE CASCADE,
     FOREIGN KEY (sessiontype_id)
         REFERENCES session_types(id)
@@ -55,7 +55,7 @@ CREATE TABLE group_datatypes(
     group_id INT NOT NULL,
     datatype_id INT NOT NULL,
     FOREIGN KEY (group_id)
-        REFERENCES groups(id)
+        REFERENCES experimental_groups(id)
         ON DELETE CASCADE,
     FOREIGN KEY (datatype_id)
         REFERENCES data_types(id)
@@ -67,7 +67,7 @@ CREATE TABLE group_surgerytypes (
     group_id INT NOT NULL,
     surgery_id INT NOT NULL,
     FOREIGN KEY (group_id)
-        REFERENCES groups(id)
+        REFERENCES experimental_groups(id)
         ON DELETE CASCADE,
     FOREIGN KEY (surgery_id)
         REFERENCES surgery_types(id)
@@ -84,7 +84,7 @@ CREATE TABLE mice (
     is_done INT DEFAULT 1,
     group_id INT NOT NULL,
     FOREIGN KEY (group_id)
-        REFERENCES groups(id)
+        REFERENCES experimental_groups(id)
         ON DELETE CASCADE
 );
 
